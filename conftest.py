@@ -10,6 +10,16 @@ def pytest_addoption(parser):
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
+
+    options = Options()
+    user_language = request.config.getoption("language")
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    browser = webdriver.Chrome(options=options)
+
+    fp = webdriver.FirefoxProfile()
+    fp.set_preference("intl.accept_languages", user_language)
+    browser = webdriver.Firefox(firefox_profile=fp)
+
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome()
@@ -22,6 +32,6 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
 
-options = Options()
-options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
-browser = webdriver.Chrome(options=options)
+
+
+
