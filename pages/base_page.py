@@ -7,7 +7,20 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+import string
+import random
+from datetime import date
 
+def subject_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+def creating_current_date(self):
+    today = date.today()
+    current_date = str(today.strftime("%d.%m.%Y"))
+    return current_date
+
+def numbers_generator(size=1, chars=string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 class BasePage():
     def __init__(self, browser, url, timeout=15):  #Конструктор — метод, который вызывается, когда мы создаем объект. Конструктор объявляется ключевым словом __init__
@@ -43,3 +56,12 @@ class BasePage():
 
     def close_notification(self):
         assert self.is_element_present(*MainPageLocators.NOTIF_CLOSE)
+
+    def scroll_page(self):
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+
+
+
+
+
