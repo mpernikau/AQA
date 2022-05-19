@@ -57,66 +57,82 @@ class MainPage(BasePage):
         assert 'proposals/new' in url_check, 'Wrong URL for proposals'
 
 
-    def filling_proposal_inputs_1(self):
+    def fill_name_input_proposal(self):
         assert self.is_element_present(*MainPageLocators.SUBJECT_INPUT), 'No subject input field'
         name = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.SUBJECT_INPUT))
         time.sleep(1)
         name.send_keys(subject_generator())
 
+
+    def fill_client_input_proposal(self):
         assert self.is_element_present(*MainPageLocators.CLIENT_INPUT), 'No client input field'
         client = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.CLIENT_INPUT))
         client.send_keys('Some')
 
+
+    def click_client_input_proposal(self):
         assert self.is_element_present(*MainPageLocators.CLIENT_MENU_CHOICE), 'No client menu'
         client_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.CLIENT_MENU_CHOICE))
         client_menu.click()
 
+
+    def fill_until_input_proposal(self):
         assert self.is_element_present(*MainPageLocators.VALID_UNTIL_PROPOSAL), 'No valid until input'
         valid_until_proposal = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.VALID_UNTIL_PROPOSAL))
         valid_until_proposal.click()
         valid_until_proposal.send_keys(creating_current_date(self))
 
-    def filling_proposal_inputs_2(self):
+
+    def fill_line_input_name_proposal(self):
         assert self.is_element_present(*MainPageLocators.LINE_ITEM_INPUT), 'No line item input'
         line_item_input = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_INPUT))
         line_item_input.click()
         line_item_input.send_keys(subject_generator())
 
-        assert self.is_element_present(*MainPageLocators.LINE_ITEM_QUANTITY), 'No unit field'
+    def fill_line_input_quantity_proposal(self):
+        assert self.is_element_present(*MainPageLocators.LINE_ITEM_QUANTITY), 'No quantity field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_QUANTITY))
-        unit_proposal_field.send_keys(numbers_generator())
+        unit_proposal_field.send_keys(numbers_generator(size=2))
 
+    def fill_line_input_unit_proposal(self):
         assert self.is_element_present(*MainPageLocators.UNIT_PROPOSAL_FIELD), 'No unit field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.UNIT_PROPOSAL_FIELD))
         unit_proposal_field.send_keys('BOX')
 
+    def click_line_input_unit_proposal(self):
         assert self.is_element_present(*MainPageLocators.UNIT_MENU_CHOICE), 'No unit menu'
         unit_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.UNIT_MENU_CHOICE))
         unit_menu.click()
 
-        assert self.is_element_present(*MainPageLocators.LINE_ITEM_NET_GROSS), 'No unit field'
+    def fill_line_input_net_gross_proposal(self):
+        assert self.is_element_present(*MainPageLocators.LINE_ITEM_NET_GROSS), 'No net gross field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_NET_GROSS))
-        unit_proposal_field.send_keys(numbers_generator(size=6))
+        unit_proposal_field.send_keys(numbers_generator(size=2))
 
+
+    def click_line_item_creation_button_proposal(self):
         assert self.is_element_present(*MainPageLocators.CONFIRM_LINE_ITEM), 'No confirm line item button'
         confirm_line_item = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.CONFIRM_LINE_ITEM))
+        time.sleep(1)
         confirm_line_item.click()
 
+    def click_download_or_save_button_proposal(self):
         assert self.is_element_present(*MainPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
         download_or_save = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON))
         download_or_save.click()
 
+    def click_download_pdf_button_proposal(self):
         assert self.is_element_present(*MainPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON), 'No download pdf button'
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON))
