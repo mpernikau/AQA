@@ -16,9 +16,9 @@ class MainPage(BasePage):
         assert self.is_element_present(*MainPageLocators.ALERT_GUIDE), 'No guide alert'
 
     def guide_alert_btn_click(self):
-        assert self.is_element_present(*MainPageLocators.ALLERT_GUIDE_PASS_BTN), 'No button to skip guide'
+        assert self.is_element_present(*MainPageLocators.ALERT_GUIDE_PASS_BTN), 'No button to skip guide'
         pass_guide_btn = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.ALLERT_GUIDE_PASS_BTN))
+            EC.element_to_be_clickable(MainPageLocators.ALERT_GUIDE_PASS_BTN))
         pass_guide_btn.click()
 
     def hover_menu(self):
@@ -126,6 +126,9 @@ class MainPage(BasePage):
         time.sleep(1)
         confirm_line_item.click()
 
+    def line_item_creation_button_pressed(self):
+        assert self.is_not_element_present(*MainPageLocators.CONFIRM_LINE_ITEM), 'Line item is not confirmed'
+
     def click_download_or_save_button_proposal(self):
         assert self.is_element_present(*MainPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
         download_or_save = WebDriverWait(self.browser, 15, TimeoutException).until(
@@ -137,3 +140,7 @@ class MainPage(BasePage):
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(MainPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON))
         download_pdf.click()
+
+    def check_url_after_creating_proposal(self):
+        url_check = self.browser.current_url
+        assert 'proposals/new' not in url_check, 'Wrong URL for proposals'
