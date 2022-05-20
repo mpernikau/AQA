@@ -10,6 +10,7 @@ from selenium import webdriver
 import string
 import random
 from datetime import date
+import time
 
 def subject_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -45,20 +46,36 @@ class BasePage():
 
     def fill_email_password_fields(self):
         assert self.is_element_present(*LoginPageLocators.EMAIL_FIELD), "No email field"
-        email = self.browser.find_element(*LoginPageLocators.EMAIL_FIELD)
+        email = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.presence_of_element_located(LoginPageLocators.EMAIL_FIELD))
         email.send_keys('fleshstorm@mail.ru')
         assert self.is_element_present(*LoginPageLocators.PASS_FIELD), "No pass field"
-        passw = self.browser.find_element(*LoginPageLocators.PASS_FIELD)
+        passw = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.presence_of_element_located(LoginPageLocators.PASS_FIELD))
         passw.send_keys("Bugaga707")
         assert self.is_element_present(*LoginPageLocators.SUBMIT_BUTTON), "No submit button"
-        submit_button = self.browser.find_element(*LoginPageLocators.SUBMIT_BUTTON)
+        submit_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(LoginPageLocators.SUBMIT_BUTTON))
         submit_button.click()
+
+    def check_url_after_loggin(self):
+        url_check = self.browser.current_url
+        assert 'login' not in url_check, 'User is not logged in'
+
 
     def close_notification(self):
         assert self.is_element_present(*MainPageLocators.NOTIF_CLOSE)
 
     def scroll_page(self):
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
 
 
 
