@@ -12,6 +12,7 @@ class TestLoggedUser:
         page.personal_data_button_click()
         page.fill_email_password_fields()
         time.sleep(1)
+        page.check_url_after_loggin()
 
     def test_user_can_create_proposal(self, browser, timeout=15):
         page = MainPage(browser, "https://staging.vr-smart-guide.de")
@@ -31,6 +32,9 @@ class TestLoggedUser:
         page.click_line_input_unit_proposal()
         page.fill_line_input_net_gross_proposal()
         page.click_line_item_creation_button_proposal()
+        page.line_item_creation_button_pressed()
         page.click_download_or_save_button_proposal()
         page.click_download_pdf_button_proposal()
+        time.sleep(3)
+        page.check_url_after_creating_proposal()
         time.sleep(3)
