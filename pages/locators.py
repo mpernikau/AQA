@@ -20,7 +20,7 @@ class RegisterPageLocators():
 
 class MainPageLocators():
     ALERT_GUIDE = (By.ID, 'g1-userlane-tut-slide-content-launcher-undefined')
-    ALLERT_GUIDE_PASS_BTN = (By.ID, 'g1-userlane-slide-btn-0')
+    ALERT_GUIDE_PASS_BTN = (By.ID, 'g1-userlane-slide-btn-0')
     NOTIF_CLOSE = (By.CLASS_NAME, 'Notification-module__closeButton--1dBwr components-module__transparent-button--3mzKp')
     BURGER_MENU = (By.XPATH, '//*[@id="pbw-react-root"]/main/aside/nav/ul/li[1]')
     OUTGOING_INVOICE_PAGE = (By.CLASS_NAME, 'yygpdi-0.ivxxJA')
