@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from pages.main_page import MainPage
+from pages.proposal_page import ProposalPage
 import pytest
 import time
 
@@ -15,7 +15,7 @@ class TestLoggedUser:
         page.check_url_after_loggin()
 
     def test_user_can_create_proposal(self, browser, timeout=15):
-        page = MainPage(browser, "https://staging.vr-smart-guide.de")
+        page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
         page.open()
         page.hover_menu()
         page.enter_outgoing_invoice_page()
