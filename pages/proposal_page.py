@@ -1,5 +1,7 @@
 from .base_page import BasePage
 from pages.locators import MainPageLocators
+from pages.locators import ProposalPageLocators
+from pages.locators import ProposalPageListLocators
 import time
 from .base_page import subject_generator
 from .base_page import creating_current_date
@@ -10,7 +12,7 @@ from selenium.common.exceptions import TimeoutException
 
 
 
-class MainPage(BasePage):
+class ProposalPage(BasePage):
 
     def alert_is_present(self):
         assert self.is_element_present(*MainPageLocators.ALERT_GUIDE), 'No guide alert'
@@ -58,89 +60,99 @@ class MainPage(BasePage):
 
 
     def fill_name_input_proposal(self):
-        assert self.is_element_present(*MainPageLocators.SUBJECT_INPUT), 'No subject input field'
+        assert self.is_element_present(*ProposalPageLocators.SUBJECT_INPUT), 'No subject input field'
         name = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.SUBJECT_INPUT))
+            EC.element_to_be_clickable(ProposalPageLocators.SUBJECT_INPUT))
         time.sleep(1)
         name.send_keys(subject_generator())
 
 
     def fill_client_input_proposal(self):
-        assert self.is_element_present(*MainPageLocators.CLIENT_INPUT), 'No client input field'
+        assert self.is_element_present(*ProposalPageLocators.CLIENT_INPUT), 'No client input field'
         client = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.CLIENT_INPUT))
+            EC.element_to_be_clickable(ProposalPageLocators.CLIENT_INPUT))
         client.send_keys('Some')
 
 
     def click_client_input_proposal(self):
-        assert self.is_element_present(*MainPageLocators.CLIENT_MENU_CHOICE), 'No client menu'
+        assert self.is_element_present(*ProposalPageLocators.CLIENT_MENU_CHOICE), 'No client menu'
         client_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.CLIENT_MENU_CHOICE))
+            EC.element_to_be_clickable(ProposalPageLocators.CLIENT_MENU_CHOICE))
         client_menu.click()
 
 
     def fill_until_input_proposal(self):
-        assert self.is_element_present(*MainPageLocators.VALID_UNTIL_PROPOSAL), 'No valid until input'
+        assert self.is_element_present(*ProposalPageLocators.VALID_UNTIL_PROPOSAL), 'No valid until input'
         valid_until_proposal = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.VALID_UNTIL_PROPOSAL))
+            EC.element_to_be_clickable(ProposalPageLocators.VALID_UNTIL_PROPOSAL))
         valid_until_proposal.click()
         valid_until_proposal.send_keys(creating_current_date(self))
 
 
     def fill_line_input_name_proposal(self):
-        assert self.is_element_present(*MainPageLocators.LINE_ITEM_INPUT), 'No line item input'
+        assert self.is_element_present(*ProposalPageLocators.LINE_ITEM_INPUT), 'No line item input'
         line_item_input = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_INPUT))
+            EC.element_to_be_clickable(ProposalPageLocators.LINE_ITEM_INPUT))
         line_item_input.click()
         line_item_input.send_keys(subject_generator())
 
     def fill_line_input_quantity_proposal(self):
-        assert self.is_element_present(*MainPageLocators.LINE_ITEM_QUANTITY), 'No quantity field'
+        assert self.is_element_present(*ProposalPageLocators.LINE_ITEM_QUANTITY), 'No quantity field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_QUANTITY))
+            EC.element_to_be_clickable(ProposalPageLocators.LINE_ITEM_QUANTITY))
         unit_proposal_field.send_keys(numbers_generator(size=2))
 
     def fill_line_input_unit_proposal(self):
-        assert self.is_element_present(*MainPageLocators.UNIT_PROPOSAL_FIELD), 'No unit field'
+        assert self.is_element_present(*ProposalPageLocators.UNIT_PROPOSAL_FIELD), 'No unit field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.UNIT_PROPOSAL_FIELD))
+            EC.element_to_be_clickable(ProposalPageLocators.UNIT_PROPOSAL_FIELD))
         unit_proposal_field.send_keys('BOX')
 
     def click_line_input_unit_proposal(self):
-        assert self.is_element_present(*MainPageLocators.UNIT_MENU_CHOICE), 'No unit menu'
+        assert self.is_element_present(*ProposalPageLocators.UNIT_MENU_CHOICE), 'No unit menu'
         unit_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.UNIT_MENU_CHOICE))
+            EC.element_to_be_clickable(ProposalPageLocators.UNIT_MENU_CHOICE))
         unit_menu.click()
 
     def fill_line_input_net_gross_proposal(self):
-        assert self.is_element_present(*MainPageLocators.LINE_ITEM_NET_GROSS), 'No net gross field'
+        assert self.is_element_present(*ProposalPageLocators.LINE_ITEM_NET_GROSS), 'No net gross field'
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.LINE_ITEM_NET_GROSS))
+            EC.element_to_be_clickable(ProposalPageLocators.LINE_ITEM_NET_GROSS))
         unit_proposal_field.send_keys(numbers_generator(size=2))
 
 
     def click_line_item_creation_button_proposal(self):
-        assert self.is_element_present(*MainPageLocators.CONFIRM_LINE_ITEM), 'No confirm line item button'
+        assert self.is_element_present(*ProposalPageLocators.CONFIRM_LINE_ITEM), 'No confirm line item button'
         confirm_line_item = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.CONFIRM_LINE_ITEM))
+            EC.element_to_be_clickable(ProposalPageLocators.CONFIRM_LINE_ITEM))
         time.sleep(1)
         confirm_line_item.click()
 
     def line_item_creation_button_pressed(self):
-        assert self.is_not_element_present(*MainPageLocators.CONFIRM_LINE_ITEM), 'Line item is not confirmed'
+        assert self.is_not_element_present(*ProposalPageLocators.CONFIRM_LINE_ITEM), 'Line item is not confirmed'
 
     def click_download_or_save_button_proposal(self):
-        assert self.is_element_present(*MainPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
+        assert self.is_element_present(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
         download_or_save = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON))
+            EC.element_to_be_clickable(ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON))
         download_or_save.click()
 
     def click_download_pdf_button_proposal(self):
-        assert self.is_element_present(*MainPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON), 'No download pdf button'
+        assert self.is_element_present(*ProposalPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON), 'No download pdf button'
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON))
+            EC.element_to_be_clickable(ProposalPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON))
         download_pdf.click()
 
     def check_url_after_creating_proposal(self):
         url_check = self.browser.current_url
         assert 'proposals/new' not in url_check, 'Wrong URL for proposals'
+
+class ProposalPageList(BasePage):
+
+    def check_page_navigation_arrows(self):
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT), 'No navigation arrow right'
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT), 'No navigation arrow left'
+        next_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT))
+        next_page.click()
+        time.sleep(3)
