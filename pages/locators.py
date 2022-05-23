@@ -8,14 +8,16 @@ class LoginPageLocators():
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "[data-id='button-submit']")
     REGISTER_LINK = (By.CLASS_NAME, 'LoginForm-module__link--3_ZMP')
 
+
 class RegisterPageLocators():
     FIRST_NAME_FIELD = (By.NAME, 'firstName')
     LAST_NAME_FIELD = (By.NAME, 'lastName')
     REGISTRATION_EMAIL_FIELD = (By.ID, 'email')
     REGISTRATION_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/div[1]/div/div[2]/div[2]/form/div[4]/div/button')
     PASSWORD = (By.NAME, 'password')
-    REQ_CHECKBOX = (By.NAME, 'termsAcceptance')
-    RECAPTCHA = (By.ID, 'recaptcha-anchor')
+    REQ_CHECKBOX = (By.CSS_SELECTOR, 'input[data-id = "checkbox-terms"')
+    RECAPTCHA_FRAME = (By.CSS_SELECTOR, '#g-recaptcha > div > div > iframe')
+    RECAPTCHA_SOLVE = (By.ID, 'recaptcha-anchor')
 
 
 class MainPageLocators():
@@ -25,8 +27,11 @@ class MainPageLocators():
     BURGER_MENU = (By.XPATH, '//*[@id="pbw-react-root"]/main/aside/nav/ul/li[1]')
     OUTGOING_INVOICE_PAGE = (By.CLASS_NAME, 'yygpdi-0.ivxxJA')
     PROPOSAL_PAGE = (By.CLASS_NAME, 'yygpdi-0.iGUYFO')
-    CREATE_PROPOSAL_BUTTON = (By.CSS_SELECTOR,"button[dataid = 'Proposals:button-new']")
+    CREATE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[dataid = 'Proposals:button-new']")
     BUTTON_BANK_ALERT = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
+
+
+class ProposalPageLocators():
     SUBJECT_INPUT = (By.CSS_SELECTOR, 'input[data-id = "ProposalPage:input-subject"]')
     CLIENT_INPUT = (By.NAME, 'client')
     CLIENT_MENU_CHOICE = (By.CSS_SELECTOR, 'li[data-id = "option-1"]')
@@ -39,3 +44,20 @@ class MainPageLocators():
     CONFIRM_LINE_ITEM = (By.CSS_SELECTOR, "button[data-id = 'LineItem:button-submit']")
     DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-download-or-save']")
     DOWNLOAD_PDF_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'download-pdf']")
+
+
+class ProposalPageListLocators():
+    PROPOSAL_PAGE_SEARCH = (By.CSS_SELECTOR, 'input[data-id="Proposals:input-search"]')
+    PROPOSAL_PAGE_FILTERS_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[1]')
+    PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]')
+    PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, 'button[data-id="CSVExport:button"]')
+    PROPOSAL_VIEW_BUTTON = (By.XPATH, '//*[@id="outgoing-invoice-show-button"]/div[1]')
+    PROPOSAL_EDIT_BUTTON = (By.XPATH, '//*[@id="outgoing-invoice-edit-button"]/div[2]')
+    PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
+    PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '//*[@id="dropdown-more-button"]')
+    PROPOSAL_TO_INVOICE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[1]/button')
+    PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
+    PROPOSAL_DELETE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[3]/button')
+    PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT = (By.CSS_SELECTOR, 'button[data-id = "next-page"]')
+    PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT = (By.CSS_SELECTOR, 'button[data-id="previous-page"]')
+    PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD = (By.CSS_SELECTOR, 'button[data-id="current-page"]')
