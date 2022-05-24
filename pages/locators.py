@@ -51,13 +51,19 @@ class ProposalPageListLocators():
     PROPOSAL_PAGE_FILTERS_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[1]')
     PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]')
     PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, 'button[data-id="CSVExport:button"]')
-    PROPOSAL_VIEW_BUTTON = (By.XPATH, '//*[@id="outgoing-invoice-show-button"]/div[1]')
-    PROPOSAL_EDIT_BUTTON = (By.XPATH, '//*[@id="outgoing-invoice-edit-button"]/div[2]')
-    PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
-    PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '//*[@id="dropdown-more-button"]')
-    PROPOSAL_TO_INVOICE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[1]/button')
-    PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
-    PROPOSAL_DELETE_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[3]/button')
+
+    SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id="ProposalRow:subject"]')
+    PROPOSAL_VIEW_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[1]/a')
+    PROPOSAL_EDIT_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[2]/a')
+    PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
+    PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[1]/div[2]')
+    PROPOSAL_TO_INVOICE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[1]/button')
+    PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
+    PROPOSAL_DELETE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[3]/button')
+
+    PROPOSAL_PAGE_PAGINATION = (By.CSS_SELECTOR, 'nav[data-id="pagination"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT = (By.CSS_SELECTOR, 'button[data-id = "next-page"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT = (By.CSS_SELECTOR, 'button[data-id="previous-page"]')
-    PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD = (By.CSS_SELECTOR, 'button[data-id="current-page"]')
+    PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[3]/div/nav/div/input')
+
+
