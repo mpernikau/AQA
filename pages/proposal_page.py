@@ -155,4 +155,32 @@ class ProposalPageList(BasePage):
         next_page = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT))
         next_page.click()
-        time.sleep(3)
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD), 'No current page input'
+        time.sleep(1)
+
+        page_number = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD)
+        page_number_value = page_number.get_attribute('value')
+        assert page_number_value == '2', 'Wrong page'
+
+        previous_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT))
+        previous_page.click()
+
+        time.sleep(1)
+        page_num = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD)
+        page_num_value = page_num.get_attribute('value')
+        assert page_num_value == '1', 'Wrong page'
+
+
+    def check_proposal_view_mode(self):
+        subject_on_page = self.browser.find_element(*ProposalPageListLocators.SUBJECT_ON_PROPOSAL_PAGE).text
+
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_VIEW_BUTTON), 'No view button on the first invoice'
+
+        view_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_VIEW_BUTTON))
+        view_button.click()
+
+        subject_on_document = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
+        subject_on_document_value = subject_on_document.get_attribute('value')
+        assert subject_on_page == subject_on_document_value, 'Wrong proposal was choosen for checking'
