@@ -45,6 +45,7 @@ class TestLoggedUser:
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_page_navigation_arrows()
 
+
     @pytest.mark.smoke
     def test_user_can_enter_proposal_view_mode(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
@@ -54,6 +55,7 @@ class TestLoggedUser:
     def test_user_can_enter_proposal_edit_mode(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_edit_mode()
+
 
     def test_user_can_use_search_on_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
