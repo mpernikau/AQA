@@ -5,7 +5,6 @@ import pytest
 import time
 
 class TestLoggedUser:
-
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         page = BasePage(browser, "https://staging.vr-smart-guide.de/login")
