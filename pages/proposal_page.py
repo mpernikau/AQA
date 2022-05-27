@@ -223,10 +223,23 @@ class ProposalPageList(BasePage):
     def check_proposal_edit_mode(self):
         assert self.is_element_present(
             *ProposalPageListLocators.PROPOSAL_EDIT_BUTTON), 'No view button on the first invoice'
+        subject_on_page = self.browser.find_element(*ProposalPageListLocators.SUBJECT_ON_PROPOSAL_PAGE).text
         edit_button = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_EDIT_BUTTON))
         edit_button.click()
+        time.sleep(1)
 
+        subject_on_document = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
+        assert self.is_element_present(*ProposalPageLocators.SUBJECT_INPUT), 'Smth wrong with name on proposal page'
+        subject_on_document_value = subject_on_document.get_attribute('value')
+
+        assert subject_on_page == subject_on_document_value, 'Wrong proposal was chosen for checking'
+
+        input_disabling_finding = self.browser.find_element(
+            *ProposalPageLocators.SUBJECT_INPUT)
+        input_is_disabled = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
+        input_is_disabled.click()
+        assert True, 'Input is disabled'
 
 
     def check_proposal_search_input(self):
