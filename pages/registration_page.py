@@ -1,16 +1,7 @@
-from .base_page import BasePage
 from pages.locators import RegisterPageLocators
-from pages.base_page import subject_generator
-from selenium.webdriver.support.ui import WebDriverWait
 from .base_page import BasePage
-from pages.locators import MainPageLocators
 import time
 from .base_page import subject_generator
-from .base_page import creating_current_date
-from .base_page import numbers_generator
-
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
 
 

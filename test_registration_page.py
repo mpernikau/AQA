@@ -1,6 +1,3 @@
-from pages.base_page import BasePage
-#from pages.login_page import LoginPage
-from pages.proposal_page import MainPage
 from pages.registration_page import RegisterPage
 
 import time
