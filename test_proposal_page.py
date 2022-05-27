@@ -51,6 +51,7 @@ class TestLoggedUser:
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_view_mode()
 
+
     @pytest.mark.smoke
     def test_user_can_enter_proposal_edit_mode(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
