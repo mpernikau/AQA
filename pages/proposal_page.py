@@ -220,6 +220,7 @@ class ProposalPageList(BasePage):
         input_is_disabled = input_disabling_finding.get_property('disabled')
         assert True, 'Input is not disabled'
 
+
     def check_proposal_edit_mode(self):
         assert self.is_element_present(
             *ProposalPageListLocators.PROPOSAL_EDIT_BUTTON), 'No view button on the first invoice'
