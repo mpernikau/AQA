@@ -169,6 +169,7 @@ class ProposalPage(BasePage):
         # Check if url contains 'proposals/new'
         assert 'proposals/new' not in url_check, 'Wrong URL for proposals'
 
+
 class ProposalPageList(BasePage):
 
     def check_page_navigation_arrows(self):
@@ -241,6 +242,36 @@ class ProposalPageList(BasePage):
         input_is_disabled = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
         input_is_disabled.click()
         assert True, 'Input is disabled'
+
+
+    def check_proposal_duplicate_button(self):
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_DUPLICATE_BUTTON), 'No duplicate button on the first invoice'
+        duplicate_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_DUPLICATE_BUTTON))
+        duplicate_button.click()
+        client_table = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.CLIENT_INPUT))
+        client_table.click()
+        assert True, 'Client input is not clickable'
+
+
+    def check_proposal_to_invoice_button(self):
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON), 'No more options button on the first invoice'
+        more_options_button = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON)
+        more_options_button.click()
+
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_TO_INVOICE_BUTTON), 'No proposal_to_invoice button on the first invoice'
+        proposal_to_invoice_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_TO_INVOICE_BUTTON))
+        proposal_to_invoice_button.click()
+
+        url_check = self.browser.current_url
+        # Check if url contains 'from-proposal'
+        assert 'from-proposal' not in url_check, 'Wrong URL from proposals to invoice'
+
 
 
     def check_proposal_search_input(self):
