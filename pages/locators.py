@@ -56,7 +56,7 @@ class ProposalPageListLocators():
     PROPOSAL_VIEW_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[1]/a')
     PROPOSAL_EDIT_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[2]/a')
     PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
-    PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[1]/div[2]')
+    PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div')
     PROPOSAL_TO_INVOICE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[1]/button')
     PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
     PROPOSAL_DELETE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[3]/button')
