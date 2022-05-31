@@ -45,19 +45,30 @@ class TestLoggedUser:
         page_proposal.check_page_navigation_arrows()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_enter_proposal_view_mode(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_view_mode()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_enter_proposal_edit_mode(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_edit_mode()
 
 
+    @pytest.mark.smoke
+    def test_user_can_duplicate_proposals(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_proposal_duplicate_button()
+
+
+    @pytest.mark.smoke
+    def test_user_can_create_invoice_from_proposal(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_proposal_to_invoice_button()
+
+
     def test_user_can_use_search_on_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_search_input()
-        time.sleep(2)
