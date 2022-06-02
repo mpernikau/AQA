@@ -18,8 +18,8 @@ class TestLoggedUser:
         page.enter_outgoing_invoice_page()
         page.enter_proposal_page()
 
-
-    def test_user_can_create_proposal(self, browser, timeout=15):
+    @pytest.mark.smoke
+    def test_user_can_create_proposal(self, browser):
         page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
         page.create_new_proposal()
         page.fill_name_input_proposal()
@@ -57,13 +57,13 @@ class TestLoggedUser:
         page_proposal.check_proposal_edit_mode()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_duplicate_proposals(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_duplicate_button()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_create_invoice_from_proposal(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_to_invoice_button()
@@ -72,3 +72,10 @@ class TestLoggedUser:
     def test_user_can_use_search_on_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_search_input()
+
+    # might be changed after next patch
+    # @pytest.mark.smoke
+    def test_user_can_delete_proposal(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_proposal_delete_button()
+        time.sleep(3)
