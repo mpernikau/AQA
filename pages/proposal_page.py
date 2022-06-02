@@ -272,6 +272,21 @@ class ProposalPageList(BasePage):
         # Check if url contains 'from-proposal'
         assert 'from-proposal' not in url_check, 'Wrong URL from proposals to invoice'
 
+    #might be changed after next patch
+    def check_proposal_delete_button(self):
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON), 'No more options button on the first invoice'
+        more_options_button = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON)
+        more_options_button.click()
+
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_DELETE_BUTTON), 'No delete_proposal button on the first invoice'
+        proposal_to_invoice_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_DELETE_BUTTON))
+        proposal_to_invoice_button.click()
+
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_DELETION_ALERT_BUTTON_YES)
+
 
 
     def check_proposal_search_input(self):
