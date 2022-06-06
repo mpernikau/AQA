@@ -1,7 +1,10 @@
+import os
+
 from .base_page import BasePage
 from pages.locators import MainPageLocators
 from pages.locators import ProposalPageLocators
 from pages.locators import ProposalPageListLocators
+from pages.locators import OutgoingInvoiceLocators
 import time
 from .base_page import subject_generator
 from .base_page import creating_current_date
@@ -9,7 +12,6 @@ from .base_page import numbers_generator
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
 
 
 class ProposalPage(BasePage):
@@ -103,9 +105,9 @@ class ProposalPage(BasePage):
 
     def fill_line_input_name_proposal(self):
         # Check if there is name field
-        assert self.is_element_present(*ProposalPageLocators.LINE_ITEM_INPUT), 'No line item input'
         line_item_input = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageLocators.LINE_ITEM_INPUT))
+        assert self.is_element_present(*ProposalPageLocators.LINE_ITEM_INPUT), 'No line item input'
         line_item_input.click()
         line_item_input.send_keys(subject_generator())
 
@@ -153,7 +155,7 @@ class ProposalPage(BasePage):
     def click_download_or_save_button_proposal(self):
         # Check is there download or save button
         assert self.is_element_present(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
-        download_or_save = WebDriverWait(self.browser, 15, TimeoutException).until(
+        download_or_save = WebDriverWait(self.browser, 5, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON))
         download_or_save.click()
 
@@ -169,6 +171,39 @@ class ProposalPage(BasePage):
         # Check if url contains 'proposals/new'
         assert 'proposals/new' not in url_check, 'Wrong URL for proposals'
 
+    def create_invoice_from_proposal(self):
+        assert self.is_element_present(
+            *ProposalPageLocators.PROPOSAL_PAGE_TO_INVOICE_BUTTON), 'No proposal_-to-invoice button'
+        proposal_page_to_invoice_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.PROPOSAL_PAGE_TO_INVOICE_BUTTON))
+        proposal_page_to_invoice_button.click()
+
+        assert self.is_element_present(
+            *ProposalPageLocators.SAVE_BEFORE_CONTINUE_MODAL_BUTTON), 'No save before continue modal button'
+        proposal_save_before_continue = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.SAVE_BEFORE_CONTINUE_MODAL_BUTTON))
+        proposal_save_before_continue.click()
+
+        time.sleep(3)
+        url_check = self.browser.current_url
+        # Check if url contains 'from-proposal'
+        assert 'from-proposal' in url_check, 'Wrong URL from proposals to invoice'
+
+        assert self.is_element_present(
+            *OutgoingInvoiceLocators.INVOICE_STATUS), 'No invoice status field'
+        assert self.is_element_present(*OutgoingInvoiceLocators.DOWNLOAD_OR_SAVE_INVOICE_BUTTON), 'No download or save button'
+        download_or_save_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OutgoingInvoiceLocators.DOWNLOAD_OR_SAVE_INVOICE_BUTTON))
+        download_or_save_button.click()
+
+        assert self.is_element_present(*OutgoingInvoiceLocators.DOWNLOAD_PDF_INVOICE_BUTTON), 'No download pdf button'
+        download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OutgoingInvoiceLocators.DOWNLOAD_PDF_INVOICE_BUTTON))
+        download_pdf.click()
+
+        url_check = self.browser.current_url
+        # Check if url contains '/revenue/outgoing-invoices'
+        assert '/revenue/outgoing-invoices' in url_check, 'Wrong URL for invoice'
 
 class ProposalPageList(BasePage):
 
@@ -272,21 +307,15 @@ class ProposalPageList(BasePage):
         # Check if url contains 'from-proposal'
         assert 'from-proposal' not in url_check, 'Wrong URL from proposals to invoice'
 
-    #might be changed after next patch
+
     def check_proposal_delete_button(self):
         assert self.is_element_present(
             *ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON), 'No more options button on the first invoice'
         more_options_button = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_MORE_OPTIONS_BUTTON)
         more_options_button.click()
 
-        assert self.is_element_present(
-            *ProposalPageListLocators.PROPOSAL_DELETE_BUTTON), 'No delete_proposal button on the first invoice'
-        proposal_to_invoice_button = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_DELETE_BUTTON))
-        proposal_to_invoice_button.click()
-
-        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_DELETION_ALERT_BUTTON_YES)
-
+        assert self.is_not_element_present(
+            *ProposalPageListLocators.PROPOSAL_DELETE_BUTTON), 'There is delete_proposal button on the first invoice'
 
 
     def check_proposal_search_input(self):
@@ -301,3 +330,16 @@ class ProposalPageList(BasePage):
         assert self.is_element_present(*ProposalPageListLocators.SUBJECT_ON_PROPOSAL_PAGE)
         # Check if text in input is the same as subject name
         assert search_input_value == subject_on_page, 'Search input text is not valid'
+
+    def check_proposal_export_csv_feature(self):
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_CSV_EXPORT), 'No csv export button'
+        csv_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_CSV_EXPORT))
+        csv_button.click()
+        time.sleep(3)
+        assert self.check_csv_file_dowloaded_name('angebote_*.csv'), 'File name is wrong or file is not downloaded'
+        time.sleep(1)
+        self.delete_file_name_starts_with('angebote')
+
+
+
