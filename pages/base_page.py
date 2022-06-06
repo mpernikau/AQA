@@ -1,16 +1,15 @@
 from selenium.common.exceptions import NoSuchElementException
 from pages.locators import LoginPageLocators
 from pages.locators import MainPageLocators
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
 import string
 import random
 from datetime import date
-import time
+import os.path
+import fnmatch
+
 
 def subject_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -38,6 +37,15 @@ class BasePage():
         except (NoSuchElementException):
             return False
         return True
+
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
+
 
     def personal_data_button_click(self):
         assert self.is_element_present(*LoginPageLocators.BUTTON_PERSONAL_DATA), "Personal data button isn't found"
@@ -76,3 +84,18 @@ class BasePage():
             return True
 
         return False
+
+    def check_csv_file_dowloaded_name(self, name):
+        # Should be changed for other user, it's the download from browser dir
+        for file_name in os.listdir('C:/Users/Max/Downloads/'):
+            if fnmatch.fnmatch(file_name, name):
+                return True
+        return False
+
+
+    def delete_file_name_starts_with(self, name_part):
+        # Should be changed for other user, it's the download from browser dir
+            my_dir = ('C:/Users/Max/Downloads/')
+            for fname in os.listdir(my_dir):
+                if fname.startswith(name_part):
+                    os.remove(os.path.join(my_dir, fname))
