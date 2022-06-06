@@ -18,7 +18,7 @@ class TestLoggedUser:
         page.enter_outgoing_invoice_page()
         page.enter_proposal_page()
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_create_proposal(self, browser):
         page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
         page.create_new_proposal()
@@ -39,7 +39,28 @@ class TestLoggedUser:
         time.sleep(1)
         page.check_url_after_creating_proposal()
 
+    @pytest.mark.smoke
+    def test_user_can_create_invoice_from_proposal_document(self, browser):
+        page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
+        page.create_new_proposal()
+        page.fill_name_input_proposal()
+        page.fill_client_input_proposal()
+        page.click_client_input_proposal()
+        page.fill_until_input_proposal()
+        page.scroll_page()
+        page.fill_line_input_name_proposal()
+        page.fill_line_input_quantity_proposal()
+        page.fill_line_input_unit_proposal()
+        page.click_line_input_unit_proposal()
+        page.fill_line_input_net_gross_proposal()
+        page.click_line_item_creation_button_proposal()
+        page.line_item_creation_button_pressed()
+        page.create_invoice_from_proposal()
 
+
+
+
+    #@pytest.mark.smoke
     def test_user_can_navigate_through_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_page_navigation_arrows()
@@ -69,13 +90,18 @@ class TestLoggedUser:
         page_proposal.check_proposal_to_invoice_button()
 
 
+    #@pytest.mark.smoke
     def test_user_can_use_search_on_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_search_input()
 
-    # might be changed after next patch
-    # @pytest.mark.smoke
-    def test_user_can_delete_proposal(self, browser):
+    #@pytest.mark.smoke
+    def test_user_can_not_delete_proposal(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_delete_button()
-        time.sleep(3)
+
+
+    #@pytest.mark.smoke
+    def test_user_can_export_csv_proposals(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_proposal_export_csv_feature()
