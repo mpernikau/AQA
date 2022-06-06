@@ -36,7 +36,7 @@ class ProposalPageLocators():
     CLIENT_INPUT = (By.NAME, 'client')
     CLIENT_MENU_CHOICE = (By.CSS_SELECTOR, 'li[data-id = "option-1"]')
     VALID_UNTIL_PROPOSAL = (By.CSS_SELECTOR, "input[data-id = 'ProposalPage:container-valid-unit']")
-    LINE_ITEM_INPUT = (By.CSS_SELECTOR, 'input[data-id = "LineItem:input-position"')
+    LINE_ITEM_INPUT = (By.CSS_SELECTOR, 'input[data-id = "LineItems:input-position"')
     LINE_ITEM_QUANTITY = (By.CSS_SELECTOR, 'input[data-id = "LineItem:input-quantity"')
     UNIT_PROPOSAL_FIELD = (By.NAME, 'unit')
     UNIT_MENU_CHOICE = (By.CSS_SELECTOR, 'div[data-id = "UnitSelect:items-menu"]')
@@ -44,15 +44,16 @@ class ProposalPageLocators():
     CONFIRM_LINE_ITEM = (By.CSS_SELECTOR, "button[data-id = 'LineItem:button-submit']")
     DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-download-or-save']")
     DOWNLOAD_PDF_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'download-pdf']")
-
+    PROPOSAL_PAGE_TO_INVOICE_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-transform']")
+    SAVE_BEFORE_CONTINUE_MODAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
 
 class ProposalPageListLocators():
     PROPOSAL_PAGE_SEARCH = (By.CSS_SELECTOR, 'input[data-id="Proposals:input-search"]')
     PROPOSAL_PAGE_FILTERS_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[1]')
     PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]')
-    PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, 'button[data-id="CSVExport:button"]')
+    PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, '[data-id="CSVExport:button"]')
 
-    SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id="ProposalRow:subject"]')
+    SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id = "ProposalRow:subject"]')
     PROPOSAL_VIEW_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[1]/a')
     PROPOSAL_EDIT_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[2]/a')
     PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
@@ -62,6 +63,7 @@ class ProposalPageListLocators():
     PROPOSAL_DELETE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
     PROPOSAL_DELETION_ALERT_BUTTON_YES = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
 
+
     PROPOSAL_PAGE_PAGINATION = (By.CSS_SELECTOR, 'nav[data-id="pagination"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT = (By.CSS_SELECTOR, 'button[data-id = "next-page"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT = (By.CSS_SELECTOR, 'button[data-id="previous-page"]')
@@ -70,3 +72,7 @@ class ProposalPageListLocators():
     PROPOSAL_PAGE_25_PER_PAGE = (By.CSS_SELECTOR, 'button[data-id = "25-per-page"]')
     PROPOSAL_PAGE_50_PER_PAGE = (By.CSS_SELECTOR, 'button[data-id = "50-per-page"]')
 
+class OutgoingInvoiceLocators():
+    INVOICE_STATUS = (By.CSS_SELECTOR, 'span[data-id = "InvoiceStatus"]')
+    DOWNLOAD_OR_SAVE_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OutgoingInvoicePage:button-actions-dropdown"]')
+    DOWNLOAD_PDF_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OutgoingInvoicePage:button-download-pdf"]')
