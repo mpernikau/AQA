@@ -1,17 +1,18 @@
-import os
-
-from .base_page import BasePage
-from pages.locators import MainPageLocators
-from pages.locators import ProposalPageLocators
-from pages.locators import ProposalPageListLocators
-from pages.locators import OutgoingInvoiceLocators
 import time
-from .base_page import subject_generator
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+from pages.locators import MainPageLocators
+from pages.locators import OrderConfromationLocators
+from pages.locators import OutgoingInvoiceLocators
+from pages.locators import ProposalPageListLocators
+from pages.locators import ProposalPageLocators
+from .base_page import BasePage
 from .base_page import creating_current_date
 from .base_page import numbers_generator
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from .base_page import subject_generator
 
 
 class ProposalPage(BasePage):
@@ -205,6 +206,43 @@ class ProposalPage(BasePage):
         # Check if url contains '/revenue/outgoing-invoices'
         assert '/revenue/outgoing-invoices' in url_check, 'Wrong URL for invoice'
 
+    def create_order_conformation_from_proposal(self):
+        assert self.is_element_present(
+            *ProposalPageLocators.PROPOSAL_PAGE_TO_ORDER_CONFORMATION), 'No proposal_-to-invoice button'
+        proposal_page_to_order_conformation_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.PROPOSAL_PAGE_TO_ORDER_CONFORMATION))
+        proposal_page_to_order_conformation_button.click()
+
+        assert self.is_element_present(
+            *ProposalPageLocators.SAVE_BEFORE_CONTINUE_MODAL_BUTTON), 'No save before continue modal button'
+        proposal_save_before_continue = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.SAVE_BEFORE_CONTINUE_MODAL_BUTTON))
+        proposal_save_before_continue.click()
+
+        time.sleep(3)
+        url_check = self.browser.current_url
+        # Check if url contains 'from-proposal'
+        assert 'order-confirmation' in url_check, 'Wrong URL from proposals to order conformation'
+
+
+        assert self.is_element_present(
+            *OrderConfromationLocators.DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON), 'No download or save button'
+        download_or_save_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON))
+        download_or_save_button.click()
+
+        assert self.is_element_present(*OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION), 'No download pdf button'
+        download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION))
+        download_pdf.click()
+
+        url_check = self.browser.current_url
+        # Check if url contains '/revenue/outgoing-invoices'
+        assert 'order-confirmation' in url_check, 'Wrong URL for order confromation'
+
+
+
+
 class ProposalPageList(BasePage):
 
     def check_page_navigation_arrows(self):
@@ -253,13 +291,13 @@ class ProposalPageList(BasePage):
 
         input_disabling_finding = self.browser.find_element(
             *ProposalPageLocators.SUBJECT_INPUT)
-        input_is_disabled = input_disabling_finding.get_property('disabled')
+        input_disabling_finding.get_property('disabled')
         assert True, 'Input is not disabled'
 
 
-    def check_proposal_edit_mode(self):
+    def user_can_edit_proposal(self):
         assert self.is_element_present(
-            *ProposalPageListLocators.PROPOSAL_EDIT_BUTTON), 'No view button on the first invoice'
+            *ProposalPageListLocators.PROPOSAL_EDIT_BUTTON), 'No edit button on the first invoice'
         subject_on_page = self.browser.find_element(*ProposalPageListLocators.SUBJECT_ON_PROPOSAL_PAGE).text
         edit_button = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_EDIT_BUTTON))
@@ -272,12 +310,51 @@ class ProposalPageList(BasePage):
 
         assert subject_on_page == subject_on_document_value, 'Wrong proposal was chosen for checking'
 
-        input_disabling_finding = self.browser.find_element(
-            *ProposalPageLocators.SUBJECT_INPUT)
-        input_is_disabled = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
-        input_is_disabled.click()
-        assert True, 'Input is disabled'
+        input_is_enabled = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
+        #input_is_enabled.click()
+        #assert True, 'Input is disabled'
+        input_is_enabled.send_keys('Aa111')
+        input_is_enabled_value = input_is_enabled.get_attribute('value')
+        assert 'Aa111' in input_is_enabled_value, 'text did not added to name'
 
+        assert self.is_element_present(*ProposalPageLocators.CATEGORY_INPUT), 'No category input'
+        category_input = self.browser.find_element(*ProposalPageLocators.CATEGORY_INPUT)
+        category_input.click()
+        assert self.is_element_present(*ProposalPageLocators.CATEGORY_OTHER_CATEGORY), 'No other category'
+        choose_other_category = self.browser.find_element(*ProposalPageLocators.CATEGORY_OTHER_CATEGORY)
+        choose_other_category.click()
+
+        assert self.is_element_present(*ProposalPageLocators.CHANGE_CATEGORY_CONFIRM_BUTTON), 'No modal to confirm changing category'
+        click_on_confirm_button = self.browser.find_element(*ProposalPageLocators.CHANGE_CATEGORY_CONFIRM_BUTTON)
+        click_on_confirm_button.click()
+
+        assert self.is_element_present(*ProposalPageLocators.CHANGE_CATEGORY_HINT), 'No hint about changing the category'
+        changing_category_hint = self.browser.find_element(*ProposalPageLocators.CHANGE_CATEGORY_HINT)
+        hint_text = 'Hinweis: Bei Auswahl dieser Kategorie wird auf dem PDF-Dokument automatisch der passende Erläuterungstext nach UStG gedruckt.'
+        changing_category_hint_text = changing_category_hint.text
+        assert hint_text in changing_category_hint_text, 'Hint text is wrong'
+
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+        save_button_is_disabled = self.browser.find_element(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON)
+        save_button_is_disabled.get_property('disabled')
+        assert True, 'Save and download button is not disabled'
+
+        to_order_conformation_button_is_disabled = self.browser.find_element(*ProposalPageLocators.PROPOSAL_PAGE_TO_ORDER_CONFORMATION)
+        to_order_conformation_button_is_disabled.get_property('disabled')
+        assert True, 'To order conformation button is not disabled'
+
+        to_draft_button_is_disabled = self.browser.find_element(*ProposalPageLocators.SAVE_AS_DRAFT_BUTTON)
+        to_draft_button_is_disabled.get_property('disabled')
+        assert True, 'To draft button is not disabled'
+
+        create_draft_click = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.SAVE_AS_DRAFT_BUTTON))
+        create_draft_click.click()
+
+        url_check = self.browser.current_url
+        # Check if url contains 'proposals'
+        assert 'proposals' in url_check, 'Wrong URL for proposals'
 
     def check_proposal_duplicate_button(self):
         assert self.is_element_present(
