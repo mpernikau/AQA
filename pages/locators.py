@@ -36,6 +36,12 @@ class ProposalPageLocators():
     CLIENT_INPUT = (By.NAME, 'client')
     CLIENT_MENU_CHOICE = (By.CSS_SELECTOR, 'li[data-id = "option-1"]')
     VALID_UNTIL_PROPOSAL = (By.CSS_SELECTOR, "input[data-id = 'ProposalPage:container-valid-unit']")
+
+    CATEGORY_INPUT = (By.CSS_SELECTOR, "input[data-id = 'ProposalPage:select-category']")
+    CATEGORY_OTHER_CATEGORY = (By.XPATH, '/html/body/div[1]/main/div/div[2]/form/div[1]/div/div[1]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[8]')
+    CHANGE_CATEGORY_CONFIRM_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'changedCategoryConfirmationButton']")
+    CHANGE_CATEGORY_HINT = (By.XPATH, '/html/body/div[1]/main/div/div[2]/form/div[1]/div/div[1]/div[2]/div/div[2]/div[3]/div/div/div[2]/p')
+
     LINE_ITEM_INPUT = (By.CSS_SELECTOR, 'input[data-id = "LineItems:input-position"')
     LINE_ITEM_QUANTITY = (By.CSS_SELECTOR, 'input[data-id = "LineItem:input-quantity"')
     UNIT_PROPOSAL_FIELD = (By.NAME, 'unit')
@@ -45,7 +51,10 @@ class ProposalPageLocators():
     DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-download-or-save']")
     DOWNLOAD_PDF_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'download-pdf']")
     PROPOSAL_PAGE_TO_INVOICE_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-transform']")
+    PROPOSAL_PAGE_TO_ORDER_CONFORMATION = (By.CSS_SELECTOR, "button[data-id='proposal-into-order-confirmation-button']")
     SAVE_BEFORE_CONTINUE_MODAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
+    SAVE_AS_DRAFT_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-save']")
+
 
 class ProposalPageListLocators():
     PROPOSAL_PAGE_SEARCH = (By.CSS_SELECTOR, 'input[data-id="Proposals:input-search"]')
@@ -76,3 +85,7 @@ class OutgoingInvoiceLocators():
     INVOICE_STATUS = (By.CSS_SELECTOR, 'span[data-id = "InvoiceStatus"]')
     DOWNLOAD_OR_SAVE_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OutgoingInvoicePage:button-actions-dropdown"]')
     DOWNLOAD_PDF_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OutgoingInvoicePage:button-download-pdf"]')
+
+class OrderConfromationLocators():
+    DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id="OrderConfirmationPage:button-download-or-save"]')
+    DOWLOAD_PDF_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id="download-pdf"]')
