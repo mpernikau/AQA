@@ -19,8 +19,10 @@ def creating_current_date(self):
     current_date = str(today.strftime("%d.%m.%Y"))
     return current_date
 
-def numbers_generator(size=1, chars=string.digits):
+
+def numbers_generator(size=1, chars = string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
 
 class BasePage():
     def __init__(self, browser, url, timeout=15):  #Конструктор — метод, который вызывается, когда мы создаем объект. Конструктор объявляется ключевым словом __init__
