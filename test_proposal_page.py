@@ -19,7 +19,7 @@ class TestLoggedUser:
         page.enter_proposal_page()
 
     #@pytest.mark.smoke
-    def test_user_can_create_proposal(self, browser):
+    def test_user_can_create_pdf_proposal(self, browser):
         page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
         page.create_new_proposal()
         page.fill_name_input_proposal()
@@ -36,8 +36,28 @@ class TestLoggedUser:
         page.line_item_creation_button_pressed()
         page.click_download_or_save_button_proposal()
         page.click_download_pdf_button_proposal()
-        time.sleep(1)
         page.check_url_after_creating_proposal()
+
+    #@pytest.mark.smoke
+    def test_user_can_send_proposal_by_email(self, browser):
+        page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
+        page.create_new_proposal()
+        page.fill_name_input_proposal()
+        page.fill_client_input_proposal()
+        page.click_client_input_proposal()
+        page.fill_until_input_proposal()
+        page.scroll_page()
+        page.fill_line_input_name_proposal()
+        page.fill_line_input_quantity_proposal()
+        page.fill_line_input_unit_proposal()
+        page.click_line_input_unit_proposal()
+        page.fill_line_input_net_gross_proposal()
+        page.click_line_item_creation_button_proposal()
+        page.line_item_creation_button_pressed()
+        page.click_download_or_save_button_proposal()
+        page.click_proposal_send_by_email()
+        page.check_url_after_sending_email()
+
 
     #@pytest.mark.smoke
     def test_user_can_create_invoice_from_proposal_document(self, browser):
@@ -89,7 +109,7 @@ class TestLoggedUser:
 
 
     @pytest.mark.smoke
-    def test_user_can_enter_proposal_edit_mode(self, browser):
+    def test_user_can_edit_proposal(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.user_can_edit_proposal()
 
@@ -101,7 +121,7 @@ class TestLoggedUser:
 
 
     #@pytest.mark.smoke
-    def test_user_can_create_invoice_from_proposal(self, browser):
+    def test_user_can_create_invoice_from_proposal_page(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_to_invoice_button()
 
