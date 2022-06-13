@@ -48,11 +48,20 @@ class ProposalPageLocators():
     UNIT_MENU_CHOICE = (By.CSS_SELECTOR, 'div[data-id = "UnitSelect:items-menu"]')
     LINE_ITEM_NET_GROSS = (By.CSS_SELECTOR, 'input[data-id = "LineItem:input-net-gross"]')
     CONFIRM_LINE_ITEM = (By.CSS_SELECTOR, "button[data-id = 'LineItem:button-submit']")
+
     DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-download-or-save']")
     DOWNLOAD_PDF_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'download-pdf']")
+
+    SEND_BY_EMAIL_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[data-id='ProposalPage:button-send-email']")
+    EMAIL_INPUT_ON_EMAIL_SENDING_MODAL = (By.CSS_SELECTOR, "input[data-id ='input-email']")
+    EMAIL_SEND_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'send-button']")
+
     PROPOSAL_PAGE_TO_INVOICE_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-transform']")
+
     PROPOSAL_PAGE_TO_ORDER_CONFORMATION = (By.CSS_SELECTOR, "button[data-id='proposal-into-order-confirmation-button']")
+
     SAVE_BEFORE_CONTINUE_MODAL_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
+
     SAVE_AS_DRAFT_BUTTON = (By.CSS_SELECTOR, "button[data-id = 'ProposalPage:button-save']")
 
 
@@ -71,7 +80,6 @@ class ProposalPageListLocators():
     PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
     PROPOSAL_DELETE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
     PROPOSAL_DELETION_ALERT_BUTTON_YES = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
-
 
     PROPOSAL_PAGE_PAGINATION = (By.CSS_SELECTOR, 'nav[data-id="pagination"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT = (By.CSS_SELECTOR, 'button[data-id = "next-page"]')
