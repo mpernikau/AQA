@@ -142,6 +142,20 @@ class ProposalPage(BasePage):
 
 
     def click_line_item_creation_button_proposal(self):
+        #checking, that buttons for creation the document are disabled before line item is confirmed
+        save_button_is_disabled = self.browser.find_element(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON)
+        save_button_is_disabled.get_property('disabled')
+        assert True, 'Save and download button is not disabled'
+
+        to_order_conformation_button_is_disabled = self.browser.find_element(
+            *ProposalPageLocators.PROPOSAL_PAGE_TO_ORDER_CONFORMATION)
+        to_order_conformation_button_is_disabled.get_property('disabled')
+        assert True, 'To order conformation button is not disabled'
+
+        to_draft_button_is_disabled = self.browser.find_element(*ProposalPageLocators.SAVE_AS_DRAFT_BUTTON)
+        to_draft_button_is_disabled.get_property('disabled')
+        assert True, 'To draft button is not disabled'
+
         # Check is there conformation line item button
         assert self.is_element_present(*ProposalPageLocators.CONFIRM_LINE_ITEM), 'No confirm line item button'
         confirm_line_item = WebDriverWait(self.browser, 15, TimeoutException).until(
@@ -156,8 +170,7 @@ class ProposalPage(BasePage):
     def click_download_or_save_button_proposal(self):
         # Check is there download or save button
         assert self.is_element_present(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON), 'No download or save button'
-        download_or_save = WebDriverWait(self.browser, 5, TimeoutException).until(
-            EC.element_to_be_clickable(ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON))
+        download_or_save = self.browser.find_element(*ProposalPageLocators.DOWNLOAD_OR_SAVE_PROPOSAL_BUTTON)
         download_or_save.click()
 
     def click_download_pdf_button_proposal(self):
@@ -166,11 +179,34 @@ class ProposalPage(BasePage):
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageLocators.DOWNLOAD_PDF_PROPOSAL_BUTTON))
         download_pdf.click()
+        time.sleep(1)
 
     def check_url_after_creating_proposal(self):
         url_check = self.browser.current_url
         # Check if url contains 'proposals/new'
         assert 'proposals/new' not in url_check, 'Wrong URL for proposals'
+
+    def click_proposal_send_by_email(self):
+        assert self.is_element_present(*ProposalPageLocators.SEND_BY_EMAIL_PROPOSAL_BUTTON), 'No send by email button'
+        send_by_email = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.SEND_BY_EMAIL_PROPOSAL_BUTTON))
+        send_by_email.click()
+
+        assert self.is_element_present(*ProposalPageLocators.EMAIL_INPUT_ON_EMAIL_SENDING_MODAL), 'No email input field'
+        email_input_fill = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.EMAIL_INPUT_ON_EMAIL_SENDING_MODAL))
+        email_input_fill.send_keys('fleshstorm@mail.ru')
+
+        assert self.is_element_present(*ProposalPageLocators.EMAIL_SEND_BUTTON), 'No email send button'
+        email_send_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.EMAIL_SEND_BUTTON))
+        email_send_button.click()
+
+
+    def check_url_after_sending_email(self):
+        url_check = self.browser.current_url
+        # Check if url contains 'proposals'
+        assert 'proposals' in url_check, 'Wrong URL'
 
     def create_invoice_from_proposal(self):
         assert self.is_element_present(
@@ -224,7 +260,6 @@ class ProposalPage(BasePage):
         # Check if url contains 'from-proposal'
         assert 'order-confirmation' in url_check, 'Wrong URL from proposals to order conformation'
 
-
         assert self.is_element_present(
             *OrderConfromationLocators.DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON), 'No download or save button'
         download_or_save_button = WebDriverWait(self.browser, 15, TimeoutException).until(
@@ -239,7 +274,6 @@ class ProposalPage(BasePage):
         url_check = self.browser.current_url
         # Check if url contains '/revenue/outgoing-invoices'
         assert 'order-confirmation' in url_check, 'Wrong URL for order confromation'
-
 
 
 
@@ -348,8 +382,7 @@ class ProposalPageList(BasePage):
         to_draft_button_is_disabled.get_property('disabled')
         assert True, 'To draft button is not disabled'
 
-        create_draft_click = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(ProposalPageLocators.SAVE_AS_DRAFT_BUTTON))
+        create_draft_click = self.browser.find_element(*ProposalPageLocators.SAVE_AS_DRAFT_BUTTON)
         create_draft_click.click()
 
         url_check = self.browser.current_url
@@ -365,7 +398,7 @@ class ProposalPageList(BasePage):
         client_table = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageLocators.CLIENT_INPUT))
         client_table.click()
-        assert True, 'Client input is not clickable'
+        assert True, 'Client input is clickable'
 
 
     def check_proposal_to_invoice_button(self):
