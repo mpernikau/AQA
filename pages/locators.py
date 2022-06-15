@@ -67,11 +67,13 @@ class ProposalPageLocators():
 
 class ProposalPageListLocators():
     PROPOSAL_PAGE_SEARCH = (By.CSS_SELECTOR, 'input[data-id="Proposals:input-search"]')
-    PROPOSAL_PAGE_FILTERS_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[1]')
+    PROPOSAL_PAGE_FILTERS_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[1]')
     PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]')
+    PROPOSAL_PAGE_FILTERS_MORE_THAN_AMOUNT_FIELD = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[3]/div/input[1]')
     PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, '[data-id="CSVExport:button"]')
 
     SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id = "ProposalRow:subject"]')
+    AMOUNT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id="ProposalRow:amount"]')
     PROPOSAL_VIEW_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[1]/a')
     PROPOSAL_EDIT_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[2]/a')
     PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
