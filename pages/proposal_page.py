@@ -466,8 +466,13 @@ class ProposalPageList(BasePage):
         more_than_field = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_MORE_THAN_AMOUNT_FIELD))
         more_than_field.send_keys('100000')
+        more_than_field_text = more_than_field.text
+        time.sleep(1)
 
-        assert self.is_element_present(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE), 'No amount on the proposal'
+        assert self.is_element_present(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE), 'No search results'
         text_from_amount = self.browser.find_element(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE).text
-        assert text_from_amount > '100000'
+        assert text_from_amount > more_than_field_text
+
+
+
 
