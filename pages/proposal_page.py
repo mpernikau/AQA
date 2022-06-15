@@ -451,5 +451,23 @@ class ProposalPageList(BasePage):
         time.sleep(1)
         self.delete_file_name_starts_with('angebote')
 
+    def proposal_page_filters_work_properly(self):
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON), 'No filter clean button'
+        clean_filters = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_CLEAN_BUTTON))
+        clean_filters.click()
 
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_BUTTON), 'No filters button'
+        filters_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_BUTTON))
+        filters_button.click()
+
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_MORE_THAN_AMOUNT_FIELD), 'No more than amount field'
+        more_than_field = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_FILTERS_MORE_THAN_AMOUNT_FIELD))
+        more_than_field.send_keys('100000')
+
+        assert self.is_element_present(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE), 'No amount on the proposal'
+        text_from_amount = self.browser.find_element(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE).text
+        assert text_from_amount > '100000'
 
