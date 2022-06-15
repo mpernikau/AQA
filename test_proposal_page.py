@@ -108,7 +108,7 @@ class TestLoggedUser:
         page_proposal.check_proposal_view_mode()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_user_can_edit_proposal(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.user_can_edit_proposal()
@@ -142,3 +142,9 @@ class TestLoggedUser:
     def test_user_can_export_csv_proposals(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_proposal_export_csv_feature()
+
+
+    @pytest.mark.smoke
+    def test_filters_on_proposal_page_work_properly(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.proposal_page_filters_work_properly()
