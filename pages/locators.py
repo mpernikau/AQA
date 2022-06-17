@@ -74,6 +74,7 @@ class ProposalPageListLocators():
 
     SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id = "ProposalRow:subject"]')
     AMOUNT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id="ProposalRow:amount"]')
+    TABLE_OF_PROPOSALS = (By.XPATH, "//*[@id='pbw-react-root']/main/div/div[2]/div/div/div[2]/div/table/tbody/tr")
     PROPOSAL_VIEW_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[1]/a')
     PROPOSAL_EDIT_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[2]/a')
     PROPOSAL_DUPLICATE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[3]/button')
@@ -87,6 +88,7 @@ class ProposalPageListLocators():
     PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT = (By.CSS_SELECTOR, 'button[data-id = "next-page"]')
     PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT = (By.CSS_SELECTOR, 'button[data-id="previous-page"]')
     PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD = (By.XPATH, '//*[@id="pbw-react-root"]/main/div/div[2]/div/div/div[3]/div/nav/div/input')
+    PROPOSAL_PAGE_NAVIGATION_TOTAL_PAGES = (By.CSS_SELECTOR, 'button[data-id = "total-pages"]')
     PROPOSAL_PAGE_10_PER_PAGE = (By.CSS_SELECTOR, 'button[data-id = "10-per-page"]')
     PROPOSAL_PAGE_25_PER_PAGE = (By.CSS_SELECTOR, 'button[data-id = "25-per-page"]')
     PROPOSAL_PAGE_50_PER_PAGE = (By.CSS_SELECTOR, 'button[data-id = "50-per-page"]')
