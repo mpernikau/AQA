@@ -144,7 +144,12 @@ class TestLoggedUser:
         page_proposal.check_proposal_export_csv_feature()
 
 
-    @pytest.mark.smoke
+    #@pytest.mark.smoke
     def test_filters_on_proposal_page_work_properly(self, browser):
         page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.proposal_page_filters_work_properly()
+
+    @pytest.mark.smoke
+    def test_proposal_page_number_on_the_page_works_properly(self, browser):
+        page_proposal = ProposalPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.proposal_page_number_on_the_page_works_properly()
