@@ -473,6 +473,33 @@ class ProposalPageList(BasePage):
         text_from_amount = self.browser.find_element(*ProposalPageListLocators.AMOUNT_ON_PROPOSAL_PAGE).text
         assert text_from_amount > more_than_field_text
 
+    def proposal_page_number_on_the_page_works_properly(self):
 
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_25_PER_PAGE), 'No 25 per page button'
 
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
+        time.sleep(2)
+        press_25_per_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_25_PER_PAGE))
+        press_25_per_page.click()
+
+        time.sleep(2)
+        page_row = self.browser.find_elements(*ProposalPageListLocators.TABLE_OF_PROPOSALS)
+
+        page_row_count = (len(page_row))
+        assert page_row_count == 25, 'Wrong number of rows'
+
+        assert self.is_element_present(*ProposalPageListLocators.PROPOSAL_PAGE_50_PER_PAGE), 'No 50 per page button'
+
+        press_50_per_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_50_PER_PAGE))
+        press_50_per_page.click()
+
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+        time.sleep(2)
+        page_row = self.browser.find_elements(*ProposalPageListLocators.TABLE_OF_PROPOSALS)
+
+        page_row_count = (len(page_row))
+        assert page_row_count == 50, 'Wrong number of rows'
