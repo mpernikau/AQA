@@ -87,6 +87,24 @@ class BasePage():
 
         return False
 
+    def alert_is_present(self):
+        # Check if there is guide alert
+        assert self.is_element_present(*MainPageLocators.ALERT_GUIDE), 'No guide alert'
+
+    def guide_alert_btn_click(self):
+        # Check if there is button to skip guide
+        assert self.is_element_present(*MainPageLocators.ALERT_GUIDE_PASS_BTN), 'No button to skip guide'
+        pass_guide_btn = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(MainPageLocators.ALERT_GUIDE_PASS_BTN))
+        pass_guide_btn.click()
+
+    def hover_menu(self):
+        # Check if there is hover menu
+        assert self.is_element_present(*MainPageLocators.BURGER_MENU), 'No menu'
+        hover_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(MainPageLocators.BURGER_MENU))
+        hover_menu.click()
+
     def check_csv_file_dowloaded_name(self, name):
         # Should be changed for other user, it's the download from browser dir
         for file_name in os.listdir('C:/Users/Max/Downloads/'):

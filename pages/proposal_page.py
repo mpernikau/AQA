@@ -17,25 +17,7 @@ from .base_page import subject_generator
 
 class ProposalPage(BasePage):
 
-    def alert_is_present(self):
-        # Check if there is guide alert
-        assert self.is_element_present(*MainPageLocators.ALERT_GUIDE), 'No guide alert'
-
-    def guide_alert_btn_click(self):
-        # Check if there is button to skip guide
-        assert self.is_element_present(*MainPageLocators.ALERT_GUIDE_PASS_BTN), 'No button to skip guide'
-        pass_guide_btn = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.ALERT_GUIDE_PASS_BTN))
-        pass_guide_btn.click()
-
-    def hover_menu(self):
-        # Check if there is hover menu
-        assert self.is_element_present(*MainPageLocators.BURGER_MENU), 'No menu'
-        hover_menu = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.BURGER_MENU))
-        hover_menu.click()
-
-
+    #this def should be moved to outgoing_invoice_page when it is created
     def enter_outgoing_invoice_page(self):
         # Check if there is outgoing invoice page field in menu
         assert self.is_element_present(*MainPageLocators.OUTGOING_INVOICE_PAGE), 'No incoming invoice page'
