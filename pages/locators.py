@@ -25,9 +25,11 @@ class MainPageLocators():
     ALERT_GUIDE_PASS_BTN = (By.ID, 'g1-userlane-slide-btn-0')
     NOTIF_CLOSE = (By.CLASS_NAME, 'Notification-module__closeButton--1dBwr components-module__transparent-button--3mzKp')
     BURGER_MENU = (By.XPATH, '//*[@id="pbw-react-root"]/main/aside/nav/ul/li[1]')
-    OUTGOING_INVOICE_PAGE = (By.CLASS_NAME, 'yygpdi-0.ivxxJA')
     PROPOSAL_PAGE = (By.CLASS_NAME, 'yygpdi-0.iGUYFO')
+    ORDER_CONFORMATION_PAGE = (By.CSS_SELECTOR, 'a[data-id="orderConfirmation"]')
+    OUTGOING_INVOICE_PAGE = (By.CLASS_NAME, 'yygpdi-0.ivxxJA')
     CREATE_PROPOSAL_BUTTON = (By.CSS_SELECTOR, "button[dataid = 'Proposals:button-new']")
+    CREATE_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmation:button-new"]')
     BUTTON_BANK_ALERT = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
 
 
@@ -99,5 +101,15 @@ class OutgoingInvoiceLocators():
     DOWNLOAD_PDF_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OutgoingInvoicePage:button-download-pdf"]')
 
 class OrderConfromationLocators():
+
+    SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT = (By.CSS_SELECTOR, 'input[data-id = "OrderConfirmationPage:input-subject"]')
+    CLIENT_INPUT_ON_ORDER_CONFORMATION_DOCUMENT = (By.ID, '[id="downshift-1-input"]')
+    VALID_UNTIL_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "OrderConfirmationPage:container-valid-unit"]')
+
+    LINE_ITEM_NAME_INPUT_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "LineItems:input-position"]')
+    LINE_ITEM_QUANTITY_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "LineItem:input-quantity"]')
+    LINE_ITEM_UNITS_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "UnitSelect:input-unitSelectInput"]')
+
+    ORDER_CONFORMATION_TO_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationPage:button-transform"]')
     DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id="OrderConfirmationPage:button-download-or-save"]')
     DOWLOAD_PDF_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id="download-pdf"]')
