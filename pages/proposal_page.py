@@ -17,15 +17,6 @@ from .base_page import subject_generator
 
 class ProposalPage(BasePage):
 
-    #this def should be moved to outgoing_invoice_page when it is created
-    def enter_outgoing_invoice_page(self):
-        # Check if there is outgoing invoice page field in menu
-        assert self.is_element_present(*MainPageLocators.OUTGOING_INVOICE_PAGE), 'No incoming invoice page'
-        incoming_invoice_page = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(MainPageLocators.OUTGOING_INVOICE_PAGE))
-        incoming_invoice_page.click()
-
-
     def enter_proposal_page(self):
         # Check if there is proposal page field in menu
         assert self.is_element_present(*MainPageLocators.PROPOSAL_PAGE), 'No proposal page'
@@ -107,6 +98,7 @@ class ProposalPage(BasePage):
         unit_proposal_field = WebDriverWait(self.browser, 15, TimeoutException).until(
             EC.element_to_be_clickable(ProposalPageLocators.UNIT_PROPOSAL_FIELD))
         unit_proposal_field.send_keys('BOX')
+
 
     def click_line_input_unit_proposal(self):
         # Check if there is unit menu

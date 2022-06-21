@@ -105,6 +105,15 @@ class BasePage():
             EC.element_to_be_clickable(MainPageLocators.BURGER_MENU))
         hover_menu.click()
 
+
+    def enter_outgoing_invoice_page(self):
+        # Check if there is outgoing invoice page field in menu
+        assert self.is_element_present(*MainPageLocators.OUTGOING_INVOICE_PAGE), 'No incoming invoice page'
+        incoming_invoice_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(MainPageLocators.OUTGOING_INVOICE_PAGE))
+        incoming_invoice_page.click()
+
+
     def check_csv_file_dowloaded_name(self, name):
         # Should be changed for other user, it's the download from browser dir
         for file_name in os.listdir('C:/Users/Max/Downloads/'):
