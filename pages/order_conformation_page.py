@@ -129,9 +129,9 @@ class OrderConformationPage(BasePage):
 
     def click_download_pdf_button_order_conformation(self):
         # Check is there download pdf button
-        assert self.is_element_present(*OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION), 'No download pdf button'
+        assert self.is_element_present(*OrderConfromationLocators.DOWNLOAD_PDF_ORDER_CONFORMATION), 'No download pdf button'
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION))
+            EC.element_to_be_clickable(OrderConfromationLocators.DOWNLOAD_PDF_ORDER_CONFORMATION))
         download_pdf.click()
         time.sleep(1)
 
@@ -139,3 +139,53 @@ class OrderConformationPage(BasePage):
         url_check = self.browser.current_url
         # Check if url contains 'order-confirmation'
         assert 'order-confirmation' in url_check, 'Wrong URL for order-confirmations'
+
+    def click_order_conformation_send_by_email(self):
+        assert self.is_element_present(*OrderConfromationLocators.SEND_BY_EMAIL_BUTTON_ORDER_CONFORMATION), 'No send by email button'
+        send_by_email = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.SEND_BY_EMAIL_BUTTON_ORDER_CONFORMATION))
+        send_by_email.click()
+
+        assert self.is_element_present(*ProposalPageLocators.EMAIL_INPUT_ON_EMAIL_SENDING_MODAL), 'No email input field'
+        email_input_fill = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.EMAIL_INPUT_ON_EMAIL_SENDING_MODAL))
+        email_input_fill.send_keys('fleshstorm@mail.ru')
+
+        assert self.is_element_present(*ProposalPageLocators.EMAIL_SEND_BUTTON), 'No email send button'
+        email_send_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.EMAIL_SEND_BUTTON))
+        email_send_button.click()
+
+    def create_invoice_from_order_confirmation(self):
+        assert self.is_element_present(
+            *OrderConfromationLocators.ORDER_CONFORMATION_TO_INVOICE_BUTTON), 'No OC-to-invoice button'
+        proposal_page_to_invoice_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.ORDER_CONFORMATION_TO_INVOICE_BUTTON))
+        proposal_page_to_invoice_button.click()
+
+        assert self.is_element_present(
+            *OrderConfromationLocators.ORDER_CONFORMATION_TO_INVOICE_SAVE_BEFORE_CONTINUE_BUTTON), 'No save before continue modal button'
+        proposal_save_before_continue = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.ORDER_CONFORMATION_TO_INVOICE_SAVE_BEFORE_CONTINUE_BUTTON))
+        proposal_save_before_continue.click()
+
+        time.sleep(3)
+        url_check = self.browser.current_url
+        # Check if url contains 'from-order-confirmation'
+        assert 'from-order-confirmation' in url_check, 'Wrong URL from-order-confirmation to invoice'
+
+        assert self.is_element_present(
+            *OutgoingInvoiceLocators.INVOICE_STATUS), 'No invoice status field'
+        assert self.is_element_present(*OutgoingInvoiceLocators.DOWNLOAD_OR_SAVE_INVOICE_BUTTON), 'No download or save button'
+        download_or_save_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OutgoingInvoiceLocators.DOWNLOAD_OR_SAVE_INVOICE_BUTTON))
+        download_or_save_button.click()
+
+        assert self.is_element_present(*OutgoingInvoiceLocators.DOWNLOAD_PDF_INVOICE_BUTTON), 'No download pdf button'
+        download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OutgoingInvoiceLocators.DOWNLOAD_PDF_INVOICE_BUTTON))
+        download_pdf.click()
+
+        url_check = self.browser.current_url
+        # Check if url contains '/revenue/outgoing-invoices'
+        assert '/revenue/outgoing-invoices' in url_check, 'Wrong URL for invoice'
