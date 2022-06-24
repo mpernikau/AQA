@@ -240,9 +240,9 @@ class ProposalPage(BasePage):
             EC.element_to_be_clickable(OrderConfromationLocators.DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON))
         download_or_save_button.click()
 
-        assert self.is_element_present(*OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION), 'No download pdf button'
+        assert self.is_element_present(*OrderConfromationLocators.DOWNLOAD_PDF_ORDER_CONFORMATION), 'No download pdf button'
         download_pdf = WebDriverWait(self.browser, 15, TimeoutException).until(
-            EC.element_to_be_clickable(OrderConfromationLocators.DOWLOAD_PDF_ORDER_CONFORMATION))
+            EC.element_to_be_clickable(OrderConfromationLocators.DOWNLOAD_PDF_ORDER_CONFORMATION))
         download_pdf.click()
 
         url_check = self.browser.current_url
@@ -319,8 +319,7 @@ class ProposalPageList(BasePage):
         assert subject_on_page == subject_on_document_value, 'Wrong proposal was chosen for checking'
 
         input_is_enabled = self.browser.find_element(*ProposalPageLocators.SUBJECT_INPUT)
-        #input_is_enabled.click()
-        #assert True, 'Input is disabled'
+
         input_is_enabled.send_keys('Aa111')
         input_is_enabled_value = input_is_enabled.get_attribute('value')
         assert 'Aa111' in input_is_enabled_value, 'text did not added to name'
