@@ -249,6 +249,18 @@ class ProposalPage(BasePage):
         # Check if url contains '/revenue/outgoing-invoices'
         assert 'order-confirmation' in url_check, 'Wrong URL for order confromation'
 
+    def create_proposal_draft(self):
+        assert self.is_element_present(
+            *ProposalPageLocators.SAVE_AS_DRAFT_BUTTON), 'No save as draft button'
+        proposal_page_to_draft_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageLocators.SAVE_AS_DRAFT_BUTTON))
+        proposal_page_to_draft_button.click()
+
+        assert self.is_element_present(
+            *ProposalPageListLocators.TYPE_OF_PROPOSAL), 'No proposal type'
+        type_of_proposal = self.browser.find_element(*ProposalPageListLocators.TYPE_OF_PROPOSAL).text
+        assert 'ENTWURF' == type_of_proposal, 'Type of proposal is not draft'
+
 
 
 class ProposalPageList(BasePage):
