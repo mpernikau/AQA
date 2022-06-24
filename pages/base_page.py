@@ -20,7 +20,7 @@ def creating_current_date(self):
     return current_date
 
 
-def numbers_generator(size=1, chars = string.digits):
+def numbers_generator(size=1, chars='123456789'):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
