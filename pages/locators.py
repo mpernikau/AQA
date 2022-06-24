@@ -111,5 +111,7 @@ class OrderConfromationLocators():
     LINE_ITEM_UNITS_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "UnitSelect:input-unitSelectInput"]')
 
     ORDER_CONFORMATION_TO_INVOICE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationPage:button-transform"]')
+    ORDER_CONFORMATION_TO_INVOICE_SAVE_BEFORE_CONTINUE_BUTTON = (By.CSS_SELECTOR, 'button[data-id="ConfirmationModal:button-confirm"]')
     DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id="OrderConfirmationPage:button-download-or-save"]')
-    DOWLOAD_PDF_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id="download-pdf"]')
+    DOWNLOAD_PDF_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id="download-pdf"]')
+    SEND_BY_EMAIL_BUTTON_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationPage:button-send-email"]')
