@@ -84,7 +84,7 @@ class ProposalPageListLocators():
     PROPOSAL_MORE_OPTIONS_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div')
     PROPOSAL_TO_INVOICE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[1]/button')
     PROPOSAL_TO_ORDER_CONFORMATION_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
-    PROPOSAL_DELETE_BUTTON = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[8]/div/div[4]/div[2]/div[2]/button')
+    PROPOSAL_DELETE_BUTTON = (By.CSS_SELECTOR, 'button[data-id="ProposalRow:button-delete"]')
     PROPOSAL_DELETION_ALERT_BUTTON_YES = (By.CSS_SELECTOR, "button[data-id = 'ConfirmationModal:button-confirm']")
 
     PROPOSAL_PAGE_PAGINATION = (By.CSS_SELECTOR, 'nav[data-id="pagination"]')
