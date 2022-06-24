@@ -95,6 +95,24 @@ class TestLoggedUser:
         page.line_item_creation_button_pressed()
         page.create_order_conformation_from_proposal()
 
+    # @pytest.mark.smoke
+    def test_user_can_create_proposal_draft(self, browser):
+        page = ProposalPage(browser, "https://staging.vr-smart-guide.de")
+        page.create_new_proposal()
+        page.fill_name_input_proposal()
+        page.fill_client_input_proposal()
+        page.click_client_input_proposal()
+        page.fill_until_input_proposal()
+        page.scroll_page()
+        page.fill_line_input_name_proposal()
+        page.fill_line_input_quantity_proposal()
+        page.fill_line_input_unit_proposal()
+        page.click_line_input_unit_proposal()
+        page.fill_line_input_net_gross_proposal()
+        page.click_line_item_creation_button_proposal()
+        page.line_item_creation_button_pressed()
+        page.create_proposal_draft()
+
 
     #@pytest.mark.smoke
     def test_user_can_navigate_through_proposal_page(self, browser):
