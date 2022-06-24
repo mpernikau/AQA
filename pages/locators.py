@@ -74,6 +74,7 @@ class ProposalPageListLocators():
     PROPOSAL_PAGE_FILTERS_MORE_THAN_AMOUNT_FIELD = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[3]/div/input[1]')
     PROPOSAL_PAGE_CSV_EXPORT = (By.CSS_SELECTOR, '[data-id="CSVExport:button"]')
 
+    TYPE_OF_PROPOSAL = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[1]/div/div/span/span')
     SUBJECT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id = "ProposalRow:subject"]')
     AMOUNT_ON_PROPOSAL_PAGE = (By.CSS_SELECTOR, 'span[data-id="ProposalRow:amount"]')
     TABLE_OF_PROPOSALS = (By.XPATH, "//*[@id='pbw-react-root']/main/div/div[2]/div/div/div[2]/div/table/tbody/tr")
@@ -115,3 +116,7 @@ class OrderConfromationLocators():
     DOWNLOAD_OR_SAVE_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id="OrderConfirmationPage:button-download-or-save"]')
     DOWNLOAD_PDF_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id="download-pdf"]')
     SEND_BY_EMAIL_BUTTON_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationPage:button-send-email"]')
+    SAVE_AS_DRAFT_ORDER_CONFORMATION_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationPage:button-save"]')
+
+class OrderConformationPageLocators():
+    TYPE_OF_ORDER_CONFORMATION = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/div/div/span')
