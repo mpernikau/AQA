@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from pages.locators import MainPageLocators
 from pages.locators import OrderConfromationLocators
+from pages.locators import OrderConformationPageLocators
 from pages.locators import OutgoingInvoiceLocators
 from pages.locators import ProposalPageListLocators
 from pages.locators import ProposalPageLocators
@@ -189,3 +190,16 @@ class OrderConformationPage(BasePage):
         url_check = self.browser.current_url
         # Check if url contains '/revenue/outgoing-invoices'
         assert '/revenue/outgoing-invoices' in url_check, 'Wrong URL for invoice'
+
+
+    def create_order_confirmation_draft(self):
+        assert self.is_element_present(
+            *OrderConfromationLocators.SAVE_AS_DRAFT_ORDER_CONFORMATION_BUTTON), 'No save as draft button'
+        proposal_page_to_draft_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.SAVE_AS_DRAFT_ORDER_CONFORMATION_BUTTON))
+        proposal_page_to_draft_button.click()
+
+        assert self.is_element_present(
+            *OrderConformationPageLocators.TYPE_OF_ORDER_CONFORMATION), 'No order conformation type'
+        type_of_OC = self.browser.find_element(*OrderConformationPageLocators.TYPE_OF_ORDER_CONFORMATION).text
+        assert 'ENTWURF' == type_of_OC, 'Type of order conformation is not draft'
