@@ -120,3 +120,4 @@ class OrderConfromationLocators():
 
 class OrderConformationPageLocators():
     TYPE_OF_ORDER_CONFORMATION = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/div/div/span')
+    SUBJECT_ON_ORDER_CONFORMATION_PAGE = (By.CSS_SELECTOR, 'span[data-id = "OrderConfirmationRow:subject"]')
