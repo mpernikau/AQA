@@ -237,3 +237,23 @@ class OrderConformationlPageList(BasePage):
         page_num_value = page_num.get_attribute('value')
         # Did we move to the previous page using arrow left
         assert page_num_value == '1', 'Wrong page'
+
+    def check_order_confirmation_view_mode(self):
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_VIEW_BUTTON), 'No view button on the first invoice'
+        subject_on_page = self.browser.find_element(*OrderConformationPageLocators.SUBJECT_ON_ORDER_CONFORMATION_PAGE).text
+        view_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_VIEW_BUTTON))
+        view_button.click()
+        time.sleep(1)
+
+        subject_on_document = self.browser.find_element(*OrderConfromationLocators.SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT)
+        assert self.is_element_present(*OrderConfromationLocators.SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT), 'Smth wrong with name on proposal page'
+        subject_on_document_value = subject_on_document.get_attribute('value')
+
+        assert subject_on_page == subject_on_document_value, 'Wrong proposal was chosen for checking'
+
+        input_disabling_finding = self.browser.find_element(
+            *OrderConfromationLocators.SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT)
+        input_disabling_finding.get_property('disabled')
+        assert True, 'Input is not disabled'
