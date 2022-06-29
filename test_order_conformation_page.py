@@ -77,3 +77,9 @@ class TestPageFunctionalityLoggedUser:
     def test_user_can_navigate_through_order_conformation_page(self, browser):
         page_proposal = OrderConformationlPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_page_navigation_arrows()
+
+    #@pytest.mark.smoke
+    def test_user_can_enter_order_conformation_page_view_mode(self, browser):
+        page_proposal = OrderConformationlPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_order_confirmation_view_mode()
+
