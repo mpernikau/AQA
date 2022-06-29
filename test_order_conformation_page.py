@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from pages.proposal_page import ProposalPage
 from pages.proposal_page import ProposalPageList
 from pages.order_conformation_page import OrderConformationPage
+from pages.order_conformation_page import OrderConformationlPageList
 import pytest
 import time
 
@@ -55,3 +56,24 @@ class TestDiffrenetCreationsForLoggedUser:
     def test_user_can_create_order_conformation_draft(self, browser):
         page = OrderConformationPage(browser, "https://staging.vr-smart-guide.de")
         page.create_order_confirmation_draft()
+
+
+class TestPageFunctionalityLoggedUser:
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        page = BasePage(browser, "https://staging.vr-smart-guide.de/login")
+        page.open()
+        page.personal_data_button_click()
+        page.fill_email_password_fields()
+        time.sleep(1)
+        page.check_url_after_loggin()
+        page = OrderConformationPage(browser, "https://staging.vr-smart-guide.de")
+        page.hover_menu()
+        page.enter_outgoing_invoice_page()
+        page.enter_order_conformation_page()
+
+    #@pytest.mark.smoke
+    def test_user_can_navigate_through_order_conformation_page(self, browser):
+        page_proposal = OrderConformationlPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_page_navigation_arrows()
