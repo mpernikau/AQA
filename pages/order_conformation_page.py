@@ -203,3 +203,37 @@ class OrderConformationPage(BasePage):
             *OrderConformationPageLocators.TYPE_OF_ORDER_CONFORMATION), 'No order conformation type'
         type_of_OC = self.browser.find_element(*OrderConformationPageLocators.TYPE_OF_ORDER_CONFORMATION).text
         assert 'ENTWURF' == type_of_OC, 'Type of order conformation is not draft'
+
+class OrderConformationlPageList(BasePage):
+
+    def check_page_navigation_arrows(self):
+        # Is right arrow presented on the page
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT), 'No navigation arrow right'
+        # Is left arrow presented on the page
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT), 'No navigation arrow left'
+
+        next_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_RIGHT))
+        next_page.click()
+        # Is current page input presented on the page
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD), 'No current page input'
+        time.sleep(1)
+
+        page_number = self.browser.find_element(
+            *ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD)
+        page_number_value = page_number.get_attribute('value')
+        # Did we move to the next page using arrow right
+        assert page_number_value == '2', 'Wrong page'
+
+        previous_page = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_ARROW_LEFT))
+        previous_page.click()
+        time.sleep(1)
+
+        page_num = self.browser.find_element(*ProposalPageListLocators.PROPOSAL_PAGE_NAVIGATION_CURRENT_PAGE_FIELD)
+        page_num_value = page_num.get_attribute('value')
+        # Did we move to the previous page using arrow left
+        assert page_num_value == '1', 'Wrong page'
