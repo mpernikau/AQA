@@ -104,7 +104,7 @@ class OutgoingInvoiceLocators():
 class OrderConfromationLocators():
 
     SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT = (By.CSS_SELECTOR, 'input[data-id = "OrderConfirmationPage:input-subject"]')
-    CLIENT_INPUT_ON_ORDER_CONFORMATION_DOCUMENT = (By.ID, '[id="downshift-1-input"]')
+    CLIENT_INPUT_ON_ORDER_CONFORMATION_DOCUMENT = (By.NAME, 'client')
     VALID_UNTIL_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "OrderConfirmationPage:container-valid-unit"]')
 
     LINE_ITEM_NAME_INPUT_ORDER_CONFORMATION = (By.CSS_SELECTOR, 'input[data-id = "LineItems:input-position"]')
@@ -121,3 +121,4 @@ class OrderConfromationLocators():
 class OrderConformationPageLocators():
     TYPE_OF_ORDER_CONFORMATION = (By.XPATH, '/html/body/div[1]/main/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/div/div/span')
     SUBJECT_ON_ORDER_CONFORMATION_PAGE = (By.CSS_SELECTOR, 'span[data-id = "OrderConfirmationRow:subject"]')
+    ORDER_CONFORMATION_PAGE_DUPLICATE_BUTTON = (By.CSS_SELECTOR, 'button[data-id = "OrderConfirmationRow:button-duplicate"]')
