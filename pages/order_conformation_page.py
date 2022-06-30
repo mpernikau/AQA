@@ -257,3 +257,14 @@ class OrderConformationlPageList(BasePage):
             *OrderConfromationLocators.SUBJECT_ON_ORDER_CONFORMATION_DOCUMENT)
         input_disabling_finding.get_property('disabled')
         assert True, 'Input is not disabled'
+
+    def check_order_conformation_duplicate_button(self):
+        assert self.is_element_present(
+            *ProposalPageListLocators.PROPOSAL_DUPLICATE_BUTTON), 'No duplicate button on the first invoice'
+        duplicate_button = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConformationPageLocators.ORDER_CONFORMATION_PAGE_DUPLICATE_BUTTON))
+        duplicate_button.click()
+        client_table = WebDriverWait(self.browser, 15, TimeoutException).until(
+            EC.element_to_be_clickable(OrderConfromationLocators.CLIENT_INPUT_ON_ORDER_CONFORMATION_DOCUMENT))
+        client_table.click()
+        assert True, 'Client input not is clickable'
