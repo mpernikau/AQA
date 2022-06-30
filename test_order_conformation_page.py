@@ -83,3 +83,9 @@ class TestPageFunctionalityLoggedUser:
         page_proposal = OrderConformationlPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
         page_proposal.check_order_confirmation_view_mode()
 
+    #@pytest.mark.smoke
+    def test_user_can_duplicate_order_conformation(self, browser):
+        page_proposal = OrderConformationlPageList(browser, 'https://staging.vr-smart-guide.de/proposals')
+        page_proposal.check_order_conformation_duplicate_button()
+
+
